@@ -25,9 +25,9 @@ class Program
         {
             Description = "The vulnerability report output path"
         };
-        Option<string> internalFeedOption = new("--internalfeed")
+        Option<string> internalFeedOption = new("--internal-feed")
         {
-            Description = "Organizatio internal-feed path"
+            Description = "Organization internal-feed path"
         };
 
         RootCommand rootCommand = new("Generate your .NET SBOM");
@@ -35,6 +35,7 @@ class Program
         rootCommand.Options.Add(outputOption);
         rootCommand.Options.Add(sbomOption);
         rootCommand.Options.Add(reportOutputOption);
+        rootCommand.Options.Add(internalFeedOption);
 
         ParseResult parseResult = rootCommand.Parse(args);
         var projectPath = parseResult.GetValue<string>(projectOption);
