@@ -25,6 +25,10 @@ class Program
         {
             Description = "The vulnerability report output path"
         };
+        Option<string> internalFeedOption = new("--internal-feed")
+        {
+            Description = "Organizatio internal-feed path"
+        };
 
         RootCommand rootCommand = new("Generate your .NET SBOM");
         rootCommand.Options.Add(projectOption);
@@ -37,6 +41,7 @@ class Program
         var outputPath = parseResult.GetValue<string>(outputOption);
         var sbomPath = parseResult.GetValue<string>(sbomOption);
         var reportPath = parseResult.GetValue<string>(reportOutputOption);
+        var internalFeed = parseResult.GetValue<string>(internalFeedOption);
 
         Console.WriteLine($"Project path:{projectPath} ...");
         Console.WriteLine($"Output path:{outputPath} ...");
@@ -51,7 +56,8 @@ class Program
                 Console.WriteLine("Creating SBOM!");
                 foreach(var (reference, version) in references)
                 {
-                    var metadata = await NugetPackageMetdataHandler.GetMetadataAsync(reference, version);
+                    
+                    var metadata = await NugetPackageMetdataHandler.GetMetadataAsync(reference, version, false, internalFeed);
                     if (metadata is not null)
                         sbom.Add(metadata);
 
