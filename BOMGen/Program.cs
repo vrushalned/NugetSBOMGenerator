@@ -25,7 +25,7 @@ class Program
         {
             Description = "The vulnerability report output path"
         };
-        Option<string> internalFeedOption = new("--internal-feed")
+        Option<string> internalFeedOption = new("--internalfeed")
         {
             Description = "Organizatio internal-feed path"
         };
