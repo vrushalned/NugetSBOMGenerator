@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "NuGet.Protocol",
+    "Version": "6.14.0",
+    "Description": "NuGet\u0027s implementation for interacting with feeds. Contains functionality for all feed types.",
+    "Author": "Microsoft",
+    "License": "Apache-2.0",
+    "ProjectUrl": "https://aka.ms/nugetprj",
+    "Published": "2025-05-13 21:35:02Z"
+  },
+  {
+    "Id": "System.CommandLine",
+    "Version": "2.0.0-beta5.25306.1",
+    "Description": "Support for parsing command lines, supporting both POSIX and Windows conventions and shell-agnostic command line completions.",
+    "Author": "Microsoft",
+    "License": "MIT",
+    "ProjectUrl": "https://github.com/dotnet/command-line-api",
+    "Published": "2025-06-19 18:53:45Z"
+  }
+]

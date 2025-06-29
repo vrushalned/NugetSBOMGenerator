@@ -1,4 +1,5 @@
-﻿using System.CommandLine;
+﻿using BOMGen.Services;
+using System.CommandLine;
 using System.CommandLine.Parsing;
 
 namespace BOMGen;
@@ -16,14 +17,26 @@ class Program
         {
             Description = "The sbom output path"
         };
+        Option<string> sbomOption = new("--sbom")
+        {
+            Description = "The sbom path"
+        };
+        Option<string> reportOutputOption = new("--vulnreport")
+        {
+            Description = "The vulnerability report output path"
+        };
 
         RootCommand rootCommand = new("Generate your .NET SBOM");
         rootCommand.Options.Add(projectOption);
         rootCommand.Options.Add(outputOption);
+        rootCommand.Options.Add(sbomOption);
+        rootCommand.Options.Add(reportOutputOption);
 
         ParseResult parseResult = rootCommand.Parse(args);
         var projectPath = parseResult.GetValue<string>(projectOption);
         var outputPath = parseResult.GetValue<string>(outputOption);
+        var sbomPath = parseResult.GetValue<string>(sbomOption);
+        var reportPath = parseResult.GetValue<string>(reportOutputOption);
 
         Console.WriteLine($"Project path:{projectPath} ...");
         Console.WriteLine($"Output path:{outputPath} ...");
@@ -62,6 +75,11 @@ class Program
                 Console.WriteLine("No SBOM Generated!");
 
         }
+
+        if (!string.IsNullOrEmpty(sbomPath) && !string.IsNullOrEmpty(reportPath)) {
+               await ProcessSBOMService.ProcessSBOMAsync(sbomPath, reportPath);
+        }
+
         foreach (ParseError parseError in parseResult.Errors)
         {
             Console.Error.WriteLine(parseError.Message);
