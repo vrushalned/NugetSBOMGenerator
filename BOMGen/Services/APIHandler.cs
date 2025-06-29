@@ -19,12 +19,10 @@ namespace BOMGen.Services
         {
             try
             {
-                Console.WriteLine(request);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync($"{_baseUrl}{url}",content);
                 response.EnsureSuccessStatusCode();
                 var responseJson = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseJson);
                 var apiResponse = JsonSerializer.Deserialize<QueryResponse>(responseJson);
                 return apiResponse;
             }

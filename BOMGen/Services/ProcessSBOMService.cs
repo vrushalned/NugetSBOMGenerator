@@ -31,7 +31,6 @@ namespace BOMGen.Services
                         APIHandler handler = new APIHandler();
                         var requestJson = JsonConvert.SerializeObject(queries);
                         var response = await handler.PostAsync(requestJson, "/v1/querybatch");
-                        Console.WriteLine($"response : {JsonConvert.SerializeObject(response)}");
                         response = response ?? new();
                         if (response != null )
                         {
